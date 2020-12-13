@@ -7,7 +7,6 @@ const User = require('../Models/User');
 
 const self = (module.exports = {
   async register(req, res) {
-
     const validation = new Validator(req.body, {
       name: 'required|max:255|string',
       email: 'required|email',
@@ -82,7 +81,9 @@ const self = (module.exports = {
     return res.json({ token, user });
   },
 
-  getUser(req, res) {},
+  getUser(req, res) {
+    return res.json({ user: req.user });
+  },
 
   createToken(user) {
     return jwt.sign(
