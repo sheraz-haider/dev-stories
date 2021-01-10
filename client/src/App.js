@@ -1,8 +1,13 @@
+import { Fragment } from 'react';
+import Landing from './components/layout/Landing';
+import Navbar from './components/layout/Navbar';
+
 function App() {
-  return ( 
-    <div className="App">
-      hello world
-    </div>
+  return (
+    <Fragment>
+      <Navbar />
+      <Landing />
+    </Fragment>
   );
 }
 

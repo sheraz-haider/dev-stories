@@ -1,8 +1,10 @@
+/* global __dirname */
+const path = require('path');
 const { Router } = require('express');
 const router = Router();
 
 router.get('*', (req, res) => {
-  return res.status(200).send('Web Route Working');
+  return res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 });
 
 module.exports = router;

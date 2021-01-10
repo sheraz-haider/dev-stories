@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
 // Static file serving
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Registering all routes
 app.use(routes);
