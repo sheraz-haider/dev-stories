@@ -1,5 +1,6 @@
 const axios = require('axios');
 const Validator = require('validatorjs');
+const Post = require('../Models/Post');
 const Profile = require('../Models/Profile');
 const User = require('../Models/User');
 
