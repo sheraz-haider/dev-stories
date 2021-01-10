@@ -32,5 +32,5 @@ db.on('error', err => console.error(err));
 db.once('open', () => console.log('DB Connected!'));
 
 app.listen(process.env.APP_PORT, () =>
-  console.log(`App running on ${process.env.APP_URL}:${process.env.APP_PORT}/`)
+  console.log(`Server running on ${process.env.APP_URL}:${process.env.APP_PORT}/`)
 );
