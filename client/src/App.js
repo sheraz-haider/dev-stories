@@ -6,9 +6,13 @@ import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import { Provider } from 'react-redux';
-import store from "./store";
+import store from './store';
+import useAuthUser from './hooks/useAuthUser';
 
 function App() {
+  // authenticate and load user info if token is present
+  useAuthUser();
+
   return (
     <Provider store={store}>
       <Router>

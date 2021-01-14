@@ -4,10 +4,6 @@ const AuthController = require('../app/Controllers/AuthController');
 const PostController = require('../app/Controllers/PostController');
 const ProfileController = require('../app/Controllers/ProfileController');
 const AuthMiddleware = require('../app/Middlewares/AuthMiddleware');
-const XHRCheck = require('../app/Middlewares/XHRCheck');
-
-// will give 404 when accessed by browser
-router.use(XHRCheck);
 
 // User Routes
 router.post('/login', AuthController.login);

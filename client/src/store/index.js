@@ -7,10 +7,12 @@ const initialState = {};
 
 const middlewares = [thunk];
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middlewares))
-);
+const devtools =
+  // eslint-disable-next-line no-undef
+  process.env.NODE_ENV === 'production'
+    ? applyMiddleware(...middlewares)
+    : composeWithDevTools(applyMiddleware(...middlewares));
+
+const store = createStore(rootReducer, initialState, devtools);
 
 export default store;

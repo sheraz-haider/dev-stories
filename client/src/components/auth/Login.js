@@ -1,7 +1,16 @@
 import { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import useStore from '../../hooks/useStore';
+import { login } from '../../store/actions/auth';
 
 function Login() {
+  const [
+    {
+      auth,
+    },
+    dispatch,
+  ] = useStore();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,12 +24,19 @@ function Login() {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(login(email, password));
   };
+
+  if (auth.loadingUser) {
+    return null;
+  }
+
+  if (auth.isLoggedIn) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Fragment>
-      <div className='alert alert-danger'>Invalid credentials</div>
       <h1 className='large text-primary'>Sign In</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Sign into Your Account
