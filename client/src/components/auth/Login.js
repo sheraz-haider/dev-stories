@@ -6,7 +6,7 @@ import { login } from '../../store/actions/auth';
 function Login() {
   const [
     {
-      auth,
+      auth: { isLoggedIn },
     },
     dispatch,
   ] = useStore();
@@ -27,11 +27,7 @@ function Login() {
     dispatch(login(email, password));
   };
 
-  if (auth.loadingUser) {
-    return null;
-  }
-
-  if (auth.isLoggedIn) {
+  if (isLoggedIn) {
     return <Redirect to='/dashboard' />;
   }
 

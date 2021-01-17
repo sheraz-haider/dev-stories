@@ -1,11 +1,17 @@
 import { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import useStore from '../../hooks/useStore';
 import { setAlert } from '../../store/actions/alert';
-import PropTypes from 'prop-types';
 import { register } from '../../store/actions/auth';
 
-function Register({ setAlert, register, isLoggedIn, loadingUser }) {
+function Register() {
+  const [
+    {
+      auth: { isLoggedIn },
+    },
+    dispatch,
+  ] = useStore();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,15 +29,11 @@ function Register({ setAlert, register, isLoggedIn, loadingUser }) {
     e.preventDefault();
 
     if (password !== password2) {
-      setAlert('Password does not match', 'danger');
+      dispatch(setAlert('Password does not match', 'danger'));
     } else {
-      register(name, email, password);
+      dispatch(register(name, email, password));
     }
   };
-
-  if (loadingUser) {
-    return null;
-  }
 
   if (isLoggedIn) {
     return <Redirect to='/dashboard' />;
@@ -99,16 +101,4 @@ function Register({ setAlert, register, isLoggedIn, loadingUser }) {
   );
 }
 
-Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool,
-  loadingUser: PropTypes.bool,
-};
-
-const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn,
-  loadingUser: state.auth.loadingUser,
-});
-
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default Register;

@@ -1,8 +1,9 @@
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { removeAlert } from '../../store/actions/alert';
+import useStore from '../../hooks/useStore';
 
-function Alert({ alerts, removeAlert }) {
+function Alert() {
+  const [{ alerts }, dispatch] = useStore();
+
   return (
     alerts &&
     alerts.length > 0 &&
@@ -11,7 +12,7 @@ function Alert({ alerts, removeAlert }) {
         <span>{alert.msg}</span>
         <span
           style={{ float: 'right', cursor: 'pointer' }}
-          onClick={() => removeAlert(alert.id)}
+          onClick={() => dispatch(removeAlert(alert.id))}
         >
           X
         </span>
@@ -20,13 +21,4 @@ function Alert({ alerts, removeAlert }) {
   );
 }
 
-Alert.propTypes = {
-  alerts: PropTypes.array.isRequired,
-  removeAlert: PropTypes.func.isRequired,
-};
-
-const mapState = state => ({
-  alerts: state.alerts,
-});
-
-export default connect(mapState, { removeAlert })(Alert);
+export default Alert;
