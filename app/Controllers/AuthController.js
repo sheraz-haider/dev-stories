@@ -93,6 +93,7 @@ const self = (module.exports = {
       },
       process.env.APP_KEY,
       { expiresIn: 60 * 60 * 24 * 7 } // 7 days
+      // { expiresIn: 15 } // 15 sec
     );
   },
 });

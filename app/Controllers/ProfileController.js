@@ -12,13 +12,15 @@ module.exports = {
       }).populate('user', ['name', 'avatar']);
 
       if (!profile) {
-        return res.send(400).json({ errors: { profile: 'Profile not found' } });
+        return res
+          .status(400)
+          .json({ errors: { profile: 'Profile not found' } });
       }
 
       return res.json(profile);
     } catch (err) {
       console.error(err);
-      return res.send(500).json({ errors: { server: 'Server Error' } });
+      return res.status(500).json({ errors: { server: 'Server Error' } });
     }
   },
 
@@ -92,7 +94,7 @@ module.exports = {
       return res.json(profiles);
     } catch (err) {
       console.error(err);
-      return res.status(500).send({ errors: { server: 'Server Error' } });
+      return res.status(500).json({ errors: { server: 'Server Error' } });
     }
   },
 
@@ -107,7 +109,7 @@ module.exports = {
           .status(400)
           .json({ errors: { profile: 'Profile not found' } });
 
-      res.json(profile);
+      return res.json(profile);
     } catch (err) {
       console.error(err.message);
       if (err.kind == 'ObjectId') {
@@ -115,7 +117,8 @@ module.exports = {
           .status(400)
           .json({ errors: { profile: 'Profile not found' } });
       }
-      res.status(500).send('Server Error');
+
+      return res.status(500).send('Server Error');
     }
   },
 
@@ -281,7 +284,7 @@ module.exports = {
       return res.json(response.data);
     } catch (err) {
       console.error(err.message);
-      return res.status(500).send('Server Error');
+      return res.status(500).send({ errors: { server: [err] } });
     }
   },
 };

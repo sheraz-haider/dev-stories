@@ -1,6 +1,6 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useStore from '../../hooks/useStore';
-import { LOGOUT } from '../../store/types';
+import { CLEAR_PROFILE, LOGOUT } from '../../store/types';
 
 function Navbar() {
   const [
@@ -10,12 +10,10 @@ function Navbar() {
     dispatch,
   ] = useStore();
 
-  const history = useHistory();
-
   const logoutUser = e => {
     e.preventDefault();
+    dispatch({ type: CLEAR_PROFILE });
     dispatch({ type: LOGOUT });
-    history.push('/login');
   };
 
   const loggedOutRoutes = (
@@ -35,7 +33,7 @@ function Navbar() {
   const loggedInRoutes = (
     <ul>
       <li>
-        <Link to='/profiles'>Developers</Link>
+        <Link to='/dashboard'>Dashboard</Link>
       </li>
       <li>
         <a href='#' onClick={logoutUser}>
