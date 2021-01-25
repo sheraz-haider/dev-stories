@@ -8,6 +8,8 @@ import Alert from './components/layout/Alert';
 import useAuthUser from './hooks/useAuthUser';
 import PrivateRoute from './routing/PrivateRoute';
 import Dashboard from './components/pages/Dashboard';
+import CreateProfile from './components/pages/CreateProfile';
+import EditProfile from './components/pages/EditProfile';
 import useStore from './hooks/useStore';
 
 function App() {
@@ -42,6 +44,16 @@ function App() {
             <Route path='/login' exact component={Login} />
             <Route path='/register' exact component={Register} />
             <PrivateRoute path='/dashboard' exact component={Dashboard} />
+            <PrivateRoute
+              path='/create-profile'
+              exact
+              component={CreateProfile}
+            />
+            <PrivateRoute
+              path='/edit-profile'
+              exact
+              component={EditProfile}
+            />
           </Switch>
         </section>
       </Fragment>

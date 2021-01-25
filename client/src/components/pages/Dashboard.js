@@ -4,6 +4,22 @@ import useStore from '../../hooks/useStore';
 import { getCurrentProfile } from '../../store/actions/profile';
 import Spinner from '../layout/Spinner';
 
+function DashboardActions() {
+  return (
+    <div className='dash-buttons'>
+      <Link to='edit-profile' className='btn btn-light'>
+        <i className='fas fa-user-circle text-primary'></i> Edit Profile
+      </Link>
+      <Link to='add-experience' className='btn btn-light'>
+        <i className='fab fa-black-tie text-primary'></i> Add Experience
+      </Link>
+      <Link to='add-education' className='btn btn-light'>
+        <i className='fas fa-graduation-cap text-primary'></i> Add Education
+      </Link>
+    </div>
+  );
+}
+
 function Dashboard() {
   const [
     {
@@ -14,7 +30,6 @@ function Dashboard() {
   ] = useStore();
 
   useEffect(() => {
-    console.log('runs profile api route');
     dispatch(getCurrentProfile());
   }, []);
 
@@ -29,11 +44,13 @@ function Dashboard() {
         </p>
 
         {profile ? (
-          <Fragment>TODO: display profile here</Fragment>
+          <Fragment>
+            <DashboardActions />
+          </Fragment>
         ) : (
           <Fragment>
             <p>You have not yet setup a profile, Please add some info</p>
-            <Link to="/create-profile" className='btn btn-primary my-1'>
+            <Link to='/create-profile' className='btn btn-primary my-1'>
               Create Profile
             </Link>
           </Fragment>
@@ -41,8 +58,6 @@ function Dashboard() {
       </Fragment>
     );
   }
-
-  // return <div>Dashboard...Profile Loaded</div>;
 }
 
 export default Dashboard;

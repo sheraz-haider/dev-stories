@@ -8,8 +8,8 @@ module.exports = {
   async getMyProfile(req, res) {
     try {
       const profile = await Profile.findOne({
-        user: req.body.id,
-      }).populate('user', ['name', 'avatar']);
+        user: req.user.id,
+      }).populate('user', ['name', 'avatar']).exec();
 
       if (!profile) {
         return res
