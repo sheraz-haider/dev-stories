@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useStore from '../../hooks/useStore';
-import { getCurrentProfile } from '../../store/actions/profile';
+import { delAccount, getCurrentProfile } from '../../store/actions/profile';
 import Spinner from '../layout/Spinner';
 import DashboardActions from '../dashboard/DashboardActions';
 import ExperienceList from '../dashboard/ExperienceList';
@@ -21,6 +21,12 @@ function Dashboard() {
       dispatch(getCurrentProfile());
     }
   }, []);
+
+  const delAcc = () => {
+    if (confirm("Are you sure? this can't be undone!")) {
+      dispatch(delAccount());
+    }
+  };
 
   if (loading && profile === null) {
     return <Spinner />;
@@ -45,9 +51,8 @@ function Dashboard() {
             )}
 
             <div className='my-2'>
-              <button className='btn btn-danger'>
-                <i className='fas fa-user-minus'></i>
-                {' '} Delete My Account
+              <button className='btn btn-danger' onClick={delAcc}>
+                <i className='fas fa-user-minus'></i> Delete My Account
               </button>
             </div>
           </Fragment>

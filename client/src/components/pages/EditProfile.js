@@ -20,11 +20,11 @@ function EditProfile() {
     skills: profile?.skills.join(', '),
     githubusername: profile?.githubusername || '',
     bio: profile?.bio || '',
-    twitter: profile?.social.twitter || '',
-    facebook: profile?.social.facebook || '',
-    linkedin: profile?.social.linkedin || '',
-    youtube: profile?.social.youtube || '',
-    instagram: profile?.social.instagram || '',
+    twitter: profile?.social?.twitter || '',
+    facebook: profile?.social?.facebook || '',
+    linkedin: profile?.social?.linkedin || '',
+    youtube: profile?.social?.youtube || '',
+    instagram: profile?.social?.instagram || '',
   });
 
   useEffect(() => {
@@ -39,11 +39,11 @@ function EditProfile() {
         skills: profile?.skills.join(', '),
         githubusername: profile?.githubusername || '',
         bio: profile?.bio || '',
-        twitter: profile?.social.twitter || '',
-        facebook: profile?.social.facebook || '',
-        linkedin: profile?.social.linkedin || '',
-        youtube: profile?.social.youtube || '',
-        instagram: profile?.social.instagram || '',
+        twitter: profile?.social?.twitter || '',
+        facebook: profile?.social?.facebook || '',
+        linkedin: profile?.social?.linkedin || '',
+        youtube: profile?.social?.youtube || '',
+        instagram: profile?.social?.instagram || '',
       });
     }
   }, [profile]);

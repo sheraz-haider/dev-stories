@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from '../types';
+import {
+  CLEAR_PROFILE,
+  GET_PROFILE,
+  LOGOUT,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+} from '../types';
 import { setAlert } from './alert';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -126,6 +132,23 @@ export const delEducation = id => async dispatch => {
     });
 
     dispatch({ type: UPDATE_PROFILE, payload: res.data });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    for (const errorName in errors) {
+      dispatch(setAlert(errors[errorName][0], 'danger'));
+    }
+  }
+};
+
+export const delAccount = () => async dispatch => {
+  try {
+    await axios.delete('/api/profile/');
+
+    dispatch({ type: LOGOUT });
+    dispatch(setAlert('Your account permanently deleted', 'danger'));
+    
+    dispatch({ type: CLEAR_PROFILE });
   } catch (err) {
     const errors = err.response.data.errors;
 
