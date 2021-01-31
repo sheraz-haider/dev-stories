@@ -11,6 +11,8 @@ import Dashboard from './components/pages/Dashboard';
 import CreateProfile from './components/pages/CreateProfile';
 import EditProfile from './components/pages/EditProfile';
 import useStore from './hooks/useStore';
+import AddExperience from './components/pages/AddExperience';
+import AddEducation from './components/pages/AddEducation';
 
 function App() {
   // authenticate and load user info if token is present
@@ -49,10 +51,16 @@ function App() {
               exact
               component={CreateProfile}
             />
+            <PrivateRoute path='/edit-profile' exact component={EditProfile} />
             <PrivateRoute
-              path='/edit-profile'
+              path='/add-experience'
               exact
-              component={EditProfile}
+              component={AddExperience}
+            />
+            <PrivateRoute
+              path='/add-education'
+              exact
+              component={AddEducation}
             />
           </Switch>
         </section>

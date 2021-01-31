@@ -209,6 +209,11 @@ img {
   opacity: 0.8;
 }
 
+.btn:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .bg-light,
 .badge-light {
   border: #ccc solid 1px;

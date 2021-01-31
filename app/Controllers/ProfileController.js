@@ -142,7 +142,7 @@ module.exports = {
     const validation = new Validator(req.body, {
       title: 'required|string',
       company: 'required|string',
-      form: 'required|string',
+      from: 'required|string',
     });
 
     if (validation.fails()) {
@@ -208,7 +208,7 @@ module.exports = {
       school: 'required|string',
       degree: 'required|string',
       fieldofstudy: 'required|string',
-      form: 'required|string',
+      from: 'required|string',
     });
 
     if (validation.fails()) {

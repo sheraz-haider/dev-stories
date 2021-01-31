@@ -3,22 +3,9 @@ import { Link } from 'react-router-dom';
 import useStore from '../../hooks/useStore';
 import { getCurrentProfile } from '../../store/actions/profile';
 import Spinner from '../layout/Spinner';
-
-function DashboardActions() {
-  return (
-    <div className='dash-buttons'>
-      <Link to='edit-profile' className='btn btn-light'>
-        <i className='fas fa-user-circle text-primary'></i> Edit Profile
-      </Link>
-      <Link to='add-experience' className='btn btn-light'>
-        <i className='fab fa-black-tie text-primary'></i> Add Experience
-      </Link>
-      <Link to='add-education' className='btn btn-light'>
-        <i className='fas fa-graduation-cap text-primary'></i> Add Education
-      </Link>
-    </div>
-  );
-}
+import DashboardActions from '../dashboard/DashboardActions';
+import ExperienceList from '../dashboard/ExperienceList';
+import EducationList from '../dashboard/EducationList';
 
 function Dashboard() {
   const [
@@ -30,7 +17,9 @@ function Dashboard() {
   ] = useStore();
 
   useEffect(() => {
-    dispatch(getCurrentProfile());
+    if (!profile) {
+      dispatch(getCurrentProfile());
+    }
   }, []);
 
   if (loading && profile === null) {
@@ -46,6 +35,21 @@ function Dashboard() {
         {profile ? (
           <Fragment>
             <DashboardActions />
+
+            {profile.experience.length > 0 && (
+              <ExperienceList experience={profile.experience} />
+            )}
+
+            {profile.education.length > 0 && (
+              <EducationList education={profile.education} />
+            )}
+
+            <div className='my-2'>
+              <button className='btn btn-danger'>
+                <i className='fas fa-user-minus'></i>
+                {' '} Delete My Account
+              </button>
+            </div>
           </Fragment>
         ) : (
           <Fragment>
