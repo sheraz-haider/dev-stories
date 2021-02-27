@@ -13,6 +13,7 @@ router.get('/me', AuthMiddleware, AuthController.getUser);
 // Profile Routes
 router.get('/profile/all', ProfileController.getAllProfiles);
 router.get('/profile/user/:user_id', ProfileController.getProfileByUser);
+router.get('/profile/github/:username', ProfileController.getRepos);
 router.use(AuthMiddleware);
 router.post('/profile', ProfileController.setProfile);
 router.get('/profile/me', ProfileController.getMyProfile);
@@ -21,7 +22,6 @@ router.put('/profile/experience', ProfileController.addExperience);
 router.delete('/profile/experience/:exp_id', ProfileController.delExperience);
 router.put('/profile/education', ProfileController.addEducation);
 router.delete('/profile/education/:edu_id', ProfileController.delEducation);
-router.get('/profile/github/:username', ProfileController.getRepos);
 
 // Post Routes
 router.post('/posts', PostController.createPost);
