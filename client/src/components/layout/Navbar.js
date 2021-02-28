@@ -33,6 +33,9 @@ function Navbar() {
   const loggedInRoutes = (
     <ul>
       <li>
+        <Link to='/profiles'>Developers</Link>
+      </li>
+      <li>
         <Link to='/dashboard'>Dashboard</Link>
       </li>
       <li>
