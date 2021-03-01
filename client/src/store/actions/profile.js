@@ -66,7 +66,7 @@ export const getProfileById = (userId, setLoading) => async dispatch => {
   }
 };
 
-export const getRepos = (username, setLoading, ref) => async dispatch => {
+export const getRepos = (username, setLoading, isMounted) => async dispatch => {
   try {
     const res = await axios(`/api/profile/github/${username}`);
 
@@ -75,14 +75,14 @@ export const getRepos = (username, setLoading, ref) => async dispatch => {
       payload: res.data,
     });
 
-    ref.mounted && setLoading(false);
+    isMounted.current && setLoading(false);
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
 
-    ref.mounted && setLoading(false);
+    isMounted.current && setLoading(false);
   }
 };
 

@@ -5,7 +5,7 @@ import useStore from '../../hooks/useStore';
 import Spinner from '../layout/Spinner';
 
 function SingleProfileRepos({ username }) {
-  const ref = useRef({});
+  const isMounted = useRef();
 
   const [
     {
@@ -17,12 +17,12 @@ function SingleProfileRepos({ username }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    ref.current.mounted = true;
+    isMounted.current = true;
 
-    dispatch(getRepos(username, setLoading, ref.current));
+    dispatch(getRepos(username, setLoading, isMounted));
 
     return () => {
-      ref.current.mounted = false;
+      isMounted.current = false;
     };
   }, [username]);
 
