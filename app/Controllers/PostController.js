@@ -4,7 +4,7 @@ const User = require('../Models/User');
 
 module.exports = {
   async createPost(req, res) {
-    const validation = new Validator(res.body, {
+    const validation = new Validator(req.body, {
       text: 'required|string',
     });
 
@@ -13,12 +13,10 @@ module.exports = {
     }
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
-
       const newPost = new Post({
         text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
+        name: req.user.name,
+        avatar: req.user.avatar,
         user: req.user.id,
       });
 
@@ -33,7 +31,7 @@ module.exports = {
 
   async getAllPosts(req, res) {
     try {
-      const posts = await Post.find().sort({ date: -1 });
+      const posts = await Post.find().sort({ created_at: -1 });
       return res.json(posts);
     } catch (err) {
       console.error(err.message);

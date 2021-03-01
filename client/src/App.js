@@ -15,6 +15,8 @@ import AddExperience from './components/pages/AddExperience';
 import AddEducation from './components/pages/AddEducation';
 import Profiles from './components/pages/Profiles';
 import SingleProfile from './components/pages/SingleProfile';
+import Posts from './components/pages/Posts';
+import SinglePost from './components/pages/SinglePost';
 
 function App() {
   // authenticate and load user info if token is present
@@ -66,6 +68,8 @@ function App() {
               exact
               component={AddEducation}
             />
+            <PrivateRoute path='/posts' exact component={Posts} />
+            <PrivateRoute path='/posts/:id' exact component={SinglePost} />
           </Switch>
         </section>
       </Fragment>

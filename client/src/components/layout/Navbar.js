@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import useStore from '../../hooks/useStore';
 import { CLEAR_PROFILE, LOGOUT } from '../../store/types';
@@ -16,11 +17,21 @@ function Navbar() {
     dispatch({ type: LOGOUT });
   };
 
-  const loggedOutRoutes = (
-    <ul>
+  const commonRoutes = (
+    <Fragment>
       <li>
         <Link to='/profiles'>Developers</Link>
       </li>
+      <li>
+        <Link to='/posts'>Posts</Link>
+      </li>
+    </Fragment>
+  );
+
+  const loggedOutRoutes = (
+    <ul>
+      {commonRoutes}
+      
       <li>
         <Link to='/register'>Register</Link>
       </li>
@@ -32,9 +43,8 @@ function Navbar() {
 
   const loggedInRoutes = (
     <ul>
-      <li>
-        <Link to='/profiles'>Developers</Link>
-      </li>
+      {commonRoutes}
+      
       <li>
         <Link to='/dashboard'>Dashboard</Link>
       </li>
