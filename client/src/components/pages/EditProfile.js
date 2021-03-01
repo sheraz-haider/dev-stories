@@ -119,7 +119,7 @@ function EditProfile() {
         </div>
         <div className='form-group'>
           <input
-            type='text'
+            type='url'
             placeholder='Website'
             name='website'
             value={website}

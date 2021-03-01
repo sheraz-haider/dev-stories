@@ -14,6 +14,7 @@ import useStore from './hooks/useStore';
 import AddExperience from './components/pages/AddExperience';
 import AddEducation from './components/pages/AddEducation';
 import Profiles from './components/pages/Profiles';
+import SingleProfile from './components/pages/SingleProfile';
 
 function App() {
   // authenticate and load user info if token is present
@@ -47,6 +48,7 @@ function App() {
             <Route path='/login' exact component={Login} />
             <Route path='/register' exact component={Register} />
             <Route path='/profiles' exact component={Profiles} />
+            <Route path='/profile/:id' exact component={SingleProfile} />
             <PrivateRoute path='/dashboard' exact component={Dashboard} />
             <PrivateRoute
               path='/create-profile'

@@ -26,7 +26,7 @@ function ProfileItem({ profile }) {
 
       {skills.length > 0 && (
         <ul>
-          {skills.slice(0, 4).map((skill, index) => (
+          {skills.slice(0, 5).map((skill, index) => (
             <li className='text-primary' key={index}>
               <i className='fas fa-check'></i> {skill}
             </li>

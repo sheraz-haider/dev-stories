@@ -27,7 +27,7 @@ export const getCurrentProfile = () => async dispatch => {
   }
 };
 
-export const getProfiles = () => async dispatch => {
+export const getProfiles = (setLoading, ref) => async dispatch => {
   try {
     const res = await axios('/api/profile/all');
 
@@ -35,15 +35,19 @@ export const getProfiles = () => async dispatch => {
       type: GET_PROFILES,
       payload: res.data,
     });
+
+    ref.mounted && setLoading(false);
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    ref.mounted && setLoading(false);
   }
 };
 
-export const getProfileById = userId => async dispatch => {
+export const getProfileById = (userId, setLoading) => async dispatch => {
   try {
     const res = await axios(`/api/profile/user/${userId}`);
 
@@ -51,15 +55,18 @@ export const getProfileById = userId => async dispatch => {
       type: GET_PROFILE,
       payload: res.data,
     });
+
+    setLoading(false);
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+    setLoading(false);
   }
 };
 
-export const getRepos = username => async dispatch => {
+export const getRepos = (username, setLoading, ref) => async dispatch => {
   try {
     const res = await axios(`/api/profile/github/${username}`);
 
@@ -67,11 +74,15 @@ export const getRepos = username => async dispatch => {
       type: GET_REPOS,
       payload: res.data,
     });
+
+    ref.mounted && setLoading(false);
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    ref.mounted && setLoading(false);
   }
 };
 

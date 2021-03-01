@@ -1,22 +1,32 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import useStore from '../../hooks/useStore';
 import { getProfiles } from '../../store/actions/profile';
 import Spinner from '../layout/Spinner';
 import ProfileItem from '../profiles/ProfileItem';
 
 function Profiles() {
+  const ref = useRef({});
+
   const [
     {
-      profile: { profiles, loading },
+      profile: { profiles },
     },
     dispatch,
   ] = useStore();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    dispatch(getProfiles());
+    ref.current.mounted = true;
+    
+    dispatch(getProfiles(setLoading, ref.current));
+
+    return () => {
+      ref.current.mounted = false;
+    };
   }, []);
 
-  if (loading) {
+  if (!profiles.length && loading) {
     return <Spinner />;
   }
 

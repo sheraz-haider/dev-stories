@@ -9,7 +9,9 @@ module.exports = {
     try {
       const profile = await Profile.findOne({
         user: req.user.id,
-      }).populate('user', ['name', 'avatar']).exec();
+      })
+        .populate('user', ['name', 'avatar'])
+        .exec();
 
       if (!profile) {
         return res
@@ -271,15 +273,15 @@ module.exports = {
 
   async getRepos(req, res) {
     try {
-      const response = axios({
-        uri: encodeURI(
-          `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
-        ),
-        method: 'GET',
-        headers: {
-          'user-agent': 'node.js',
-        },
-      });
+      const response = await axios(
+        `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`,
+        {
+          method: 'GET',
+          headers: {
+            'user-agent': 'node.js',
+          },
+        }
+      );
 
       return res.json(response.data);
     } catch (err) {
